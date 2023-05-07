@@ -1,0 +1,7 @@
+ +-+-+-+-+-+-+-+-+
+ |V|i|g|e|n|e|r|e|
+ +-+-+-+-+-+-+-+-+
+'c' -> cipher
+'d' -> decipher
+'a' -> attack
+'q' -> quit
