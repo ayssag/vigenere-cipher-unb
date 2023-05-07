@@ -1,5 +1,6 @@
 from modules.vigenere_decipher import vigenere_decipher
 import os
+from unidecode import unidecode 
 
 english_freq = {'A': 0.08167, 'B': 0.01492, 'C': 0.02782, 'D': 0.04253, 'E': 0.12702, 'F': 0.02228, 'G': 0.02015,
                 'H': 0.06094, 'I': 0.06966, 'J': 0.00153, 'K': 0.00772, 'L': 0.04025, 'M': 0.02406, 'N': 0.06749,
@@ -27,7 +28,9 @@ def calculate_ic(text):
         return 0
     letter_frequencies = {letter: 0 for letter in alphabet}
     for letter in text:
-        letter_frequencies[letter] += 1
+        if letter.isalpha():
+            letter = unidecode(letter)
+            letter_frequencies[letter] += 1
     ic = sum(letter_frequencies[c] * (letter_frequencies[c] - 1) for c in alphabet) / (text_length * (text_length - 1))
     return ic
 
@@ -129,7 +132,7 @@ def check_key(text, possible_keys):
         choosen_key = input('Choose one key to decipher the text: \n')
         decryption = vigenere_decipher(text, choosen_key, display=True)
         print('Plaintext: \n', decryption)
-        key = input('Does the plaintext make sense? y/n\n')
+        key = input('\nDoes the plaintext make sense? y/n\n')
         if key == 'y':
             break
     
